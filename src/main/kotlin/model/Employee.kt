@@ -23,3 +23,9 @@ data class Employee(
     val passwordHash: String,
     val jobTitleId: Int
 )
+
+@Serializable
+data class EmployeeLoginRequest(
+    val email: String,
+    val password: String
+)
