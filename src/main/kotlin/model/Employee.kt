@@ -7,6 +7,8 @@ object Employees : Table() {
     val id = integer("id").autoIncrement()
     val name = varchar("name", 50)
     val surname = varchar("surname", 50)
+    val email = varchar("email", 50)
+    val passwordHash = varchar("passwordHash", 200)
     val jobTitleId = integer("jobTitleId").references(JobTitles.id)
 
     override val primaryKey = PrimaryKey(id)
@@ -17,5 +19,7 @@ data class Employee(
     val id: Int,
     val name: String,
     val surname: String,
+    val email: String,
+    val passwordHash: String,
     val jobTitleId: Int
 )
