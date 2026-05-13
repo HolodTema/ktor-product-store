@@ -15,3 +15,14 @@ data class ProductCategory(
     val id: Int,
     val name: String
 )
+
+@Serializable
+data class CreateProductCategoryRequest(
+    val name: String
+)
+
+@Serializable
+data class UpdateProductCategoryRequest(
+    val id: Int,
+    val name: String
+)

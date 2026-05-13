@@ -25,6 +25,6 @@ fun Application.module() {
     }
 
     routing {
-        
+
     }
 }
