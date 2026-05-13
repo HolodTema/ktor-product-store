@@ -29,3 +29,15 @@ data class EmployeeLoginRequest(
     val email: String,
     val password: String
 )
+
+@Serializable
+data class EmployeeAuthResponse(
+    val token: String,
+    val employeeId: Int,
+    val name: String,
+    val surname: String,
+    val email: String,
+    val jobTitleName: String,
+    val isAdmin: Boolean
+)
+

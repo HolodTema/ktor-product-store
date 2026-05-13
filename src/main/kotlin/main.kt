@@ -2,11 +2,13 @@ package com.terabyte
 
 import com.terabyte.plugin.configureDatabase
 import com.terabyte.plugin.configureJWT
-import io.ktor.serialization.kotlinx.json.json
-import io.ktor.server.engine.*
+import com.terabyte.routing.employeeAuthRouting
+import com.terabyte.service.EmployeeService
+import com.terabyte.service.JobTitleService
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.routing.routing
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 
 fun main(args: Array<String>) {
@@ -24,7 +26,10 @@ fun Application.module() {
         })
     }
 
-    routing {
+    val employeeService = EmployeeService()
+    val jobTitleService = JobTitleService()
 
+    routing {
+        employeeAuthRouting(employeeService, jobTitleService)
     }
 }
