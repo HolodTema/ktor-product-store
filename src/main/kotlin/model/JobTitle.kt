@@ -6,12 +6,13 @@ import org.jetbrains.exposed.sql.Table
 object JobTitles : Table() {
     val id = integer("id").autoIncrement()
     val name = varchar("name", 50)
-
+    val isAdmin = bool("isAdmin")
     override val primaryKey = PrimaryKey(id)
 }
 
 @Serializable
 data class JobTitle(
     val id: Int,
-    val name: String
+    val name: String,
+    val isAdmin: Boolean
 )

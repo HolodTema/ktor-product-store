@@ -48,6 +48,7 @@ class ProductCategoryService {
                 )
             }.singleOrNull()
     }
+
     fun getAllProductCategories(): List<ProductCategory> = transaction {
         ProductCategories.selectAll()
             .map { row ->
@@ -57,5 +58,5 @@ class ProductCategoryService {
                 )
             }
     }
-    
+
 }
