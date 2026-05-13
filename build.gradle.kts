@@ -14,6 +14,13 @@ kotlin {
     jvmToolchain(21)
 }
 dependencies {
+    // Authentication & JWT
+    implementation("io.ktor:ktor-server-auth:2.3.0")
+    implementation("io.ktor:ktor-server-auth-jwt:2.3.0")
+
+    // To hash passwords with BCrypt algorithm
+    implementation("at.favre.lib:bcrypt:0.10.2")
+
     // to convert JSON from requests to data classes
     implementation("io.ktor:ktor-server-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
