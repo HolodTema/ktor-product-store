@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.Table
 object SaleOperations : Table() {
     val id = integer("id").autoIncrement()
     val quantity = integer("quantity")
-    val product = integer("productId").references(Products.id)
+    val productId = integer("productId").references(Products.id)
     val receiptId = integer("receiptId").references(Receipts.id)
 }
 
@@ -17,3 +17,18 @@ data class SaleOperation(
     val productId: Int,
     val receiptId: Int
 )
+
+@Serializable
+data class CreateSaleOperationReceiptExistsRequest(
+    val quantity: Int,
+    val productId: Int,
+    val receiptId: Int
+)
+
+@Serializable
+data class CreateSaleOperationRequest(
+    val quantity: Int,
+    val productId: Int
+)
+
+

@@ -1,18 +1,9 @@
 package com.terabyte.service
 
-import com.terabyte.model.CreateProductRequest
-import com.terabyte.model.Product
-import com.terabyte.model.ProductCategories
-import com.terabyte.model.Products
-import com.terabyte.model.UpdateProductQuantityRequest
-import com.terabyte.model.UpdateProductRequest
+import com.terabyte.model.*
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 
 class ProductService {
 
