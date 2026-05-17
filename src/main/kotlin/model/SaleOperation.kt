@@ -8,6 +8,8 @@ object SaleOperations : Table() {
     val quantity = integer("quantity")
     val productId = integer("productId").references(Products.id)
     val receiptId = integer("receiptId").references(Receipts.id)
+
+    override val primaryKey = PrimaryKey(id)
 }
 
 @Serializable
@@ -31,4 +33,8 @@ data class CreateSaleOperationRequest(
     val productId: Int
 )
 
+@Serializable
+data class CreateManySaleOperationsRequest(
+    val saleOperations: List<CreateSaleOperationRequest>
+)
 

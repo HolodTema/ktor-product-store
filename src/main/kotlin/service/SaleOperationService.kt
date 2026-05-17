@@ -3,12 +3,21 @@ package com.terabyte.service
 import com.terabyte.model.CreateSaleOperationReceiptExistsRequest
 import com.terabyte.model.SaleOperation
 import com.terabyte.model.SaleOperations
+import org.jetbrains.exposed.sql.batchInsert
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class SaleOperationService {
+
+    fun createSaleOperations(requests: List<CreateSaleOperationReceiptExistsRequest>): Int = transaction {
+        SaleOperations.batchInsert(requests) { request ->
+            this[SaleOperations.quantity] = request.quantity
+            this[SaleOperations.productId] = request.productId
+            this[SaleOperations.receiptId] = request.receiptId
+        }.size
+    }
 
     fun createSaleOperation(request: CreateSaleOperationReceiptExistsRequest): SaleOperation? = transaction {
         val result = SaleOperations.insert {

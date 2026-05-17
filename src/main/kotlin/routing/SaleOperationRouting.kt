@@ -1,7 +1,9 @@
 package com.terabyte.routing
 
+import com.terabyte.model.CreateManySaleOperationsRequest
 import com.terabyte.model.CreateSaleOperationReceiptExistsRequest
 import com.terabyte.model.CreateSaleOperationRequest
+import com.terabyte.plugin.getEmployeeId
 import com.terabyte.service.ReceiptService
 import com.terabyte.service.SaleOperationService
 import io.ktor.http.*
@@ -24,7 +26,7 @@ fun Route.saleOperationRouting(
             post {
                 val request = call.receive<CreateSaleOperationRequest>()
 
-                val receipt = receiptService.createReceiptCurrentDateTime(request.productId)
+                val receipt = receiptService.createReceiptCurrentDateTime(call.getEmployeeId())
                 if (receipt == null) {
                     call.respond(HttpStatusCode.BadRequest)
                 }
@@ -41,6 +43,31 @@ fun Route.saleOperationRouting(
                 }
                 else {
                     call.respond(HttpStatusCode.Created, saleOperation)
+                }
+            }
+
+            post("/createMany") {
+                val request = call.receive<CreateManySaleOperationsRequest>()
+
+                val receipt = receiptService.createReceiptCurrentDateTime(call.getEmployeeId())
+                if (receipt == null) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+
+                val listRequestsToDatabase = request.saleOperations.map {
+                    CreateSaleOperationReceiptExistsRequest(
+                        quantity = it.quantity,
+                        productId = it.productId,
+                        receiptId = receipt!!.id
+                    )
+                }
+
+                val amountCreatedObjects = saleOperationService.createSaleOperations(listRequestsToDatabase)
+                if (amountCreatedObjects != listRequestsToDatabase.size) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+                else {
+                    call.respond(HttpStatusCode.Created)
                 }
             }
         }
