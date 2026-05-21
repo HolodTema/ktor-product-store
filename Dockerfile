@@ -1,8 +1,8 @@
-FROM amazoncorretto:17-alpine
+FROM amazoncorretto:21-alpine
 
 WORKDIR /ktor-product-store
 
-COPY build/libs/*-all.jar app.jar
+COPY ./*-all.jar app.jar
 
 EXPOSE 8080
 

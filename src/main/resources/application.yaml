@@ -3,7 +3,7 @@ ktor:
     port: 8080
   application:
     modules:
-      - com.terabyte.RoutingKt.configureRouting
+      - com.terabyte.MainKt.module
 
 jwt:
   secret: ${JWT_SECRET}
@@ -15,3 +15,5 @@ database:
   url: "jdbc:sqlite:./my_database.db"
   driverClassName: "org.sqlite.JDBC"
   maxPoolSize: 1
+
+kind: Application
