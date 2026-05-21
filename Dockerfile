@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-slim
+FROM amazoncorretto:17-alpine
 
 WORKDIR /ktor-product-store
 
