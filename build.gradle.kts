@@ -22,10 +22,8 @@ dependencies {
     implementation("at.favre.lib:bcrypt:0.10.2")
 
     // to convert JSON from requests to data classes
-    implementation("io.ktor:ktor-server-content-negotiation")
-    implementation("io.ktor:ktor-serialization-kotlinx-json")
-    // to use BigDecimal in DTO
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-big-numbers")
+    implementation("io.ktor:ktor-server-content-negotiation:2.3.0")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
 
     // Exposed ORM to work with SQLITE DB
     implementation("org.jetbrains.exposed:exposed-core:0.44.1")

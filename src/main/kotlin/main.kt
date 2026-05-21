@@ -2,9 +2,8 @@ package com.terabyte
 
 import com.terabyte.plugin.configureDatabase
 import com.terabyte.plugin.configureJWT
-import com.terabyte.routing.employeeAuthRouting
-import com.terabyte.service.EmployeeService
-import com.terabyte.service.JobTitleService
+import com.terabyte.routing.*
+import com.terabyte.service.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -28,8 +27,18 @@ fun Application.module() {
 
     val employeeService = EmployeeService()
     val jobTitleService = JobTitleService()
+    val productCategoryService = ProductCategoryService()
+    val productService = ProductService()
+    val receiptService = ReceiptService()
+    val saleOperationService = SaleOperationService()
+    val statisticService = StatisticService()
 
     routing {
         employeeAuthRouting(employeeService, jobTitleService)
+        productCategoryRouting(productCategoryService)
+        productRouting(productService)
+        receiptRouting(receiptService)
+        saleOperationRouting(saleOperationService, receiptService)
+        statisticsRouting(statisticService)
     }
 }

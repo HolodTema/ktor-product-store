@@ -4,3 +4,14 @@ ktor:
   application:
     modules:
       - com.terabyte.RoutingKt.configureRouting
+
+jwt:
+  secret: ${JWT_SECRET}
+  issuer: "product-store-backend-app"
+  realm: "product-store"
+
+database:
+  dbType: sqlite
+  url: "jdbc:sqlite:./my_database.db"
+  driverClassName: "org.sqlite.JDBC"
+  maxPoolSize: 1
